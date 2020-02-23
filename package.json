@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "svg-screenshot-worker",
+  "version": "1.0.0",
+  "description": "svg-screenshot-worker",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack index.js"
+  },
+  "author": "daiiz <da.iz.mg@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "xslt-processor": "^0.11.5"
+  }
+}
