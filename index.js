@@ -1,4 +1,5 @@
 const { xsltProcess, xmlParse } = require('xslt-processor')
+const { webScreenshotXslText } = require('./web-screenshot.xsl')
 const svgScreenshot = require('./svg-screenshot')
 
 const defaultXslPath = 'https://storage.googleapis.com/daiiz-bucket-1/public/web-screenshot.xsl'
@@ -9,8 +10,13 @@ const ResponseBadRequest = () => {
 
 const createSvgResponse = async ({ xmlObject, xmlPath, xslPath }) => {
   // fetch xsl content
-  const xslRes = await fetch(xslPath, { method: 'GET' })
-  const xslText = await xslRes.text()
+  let xslText
+  if (xslPath === defaultXslPath) {
+    xslText = webScreenshotXslText
+  } else {
+    const xslRes = await fetch(xslPath, { method: 'GET' })
+    xslText = await xslRes.text()
+  }
   const xslObject = xmlParse(xslText)
   // generate svg string
   const outSvgText = xsltProcess(xmlObject, xslObject)
